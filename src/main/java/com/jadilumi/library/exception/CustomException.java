@@ -1,4 +1,4 @@
-package com.jadilumi.libary.exception;
+package com.jadilumi.library.exception;
 
 import lombok.Getter;
 import org.springframework.http.HttpStatus;

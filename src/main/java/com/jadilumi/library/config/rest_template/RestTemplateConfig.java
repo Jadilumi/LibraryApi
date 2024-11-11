@@ -1,4 +1,4 @@
-package com.jadilumi.libary.config.rest_template;
+package com.jadilumi.library.config.rest_template;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

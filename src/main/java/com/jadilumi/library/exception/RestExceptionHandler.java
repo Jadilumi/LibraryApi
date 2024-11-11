@@ -1,4 +1,4 @@
-package com.jadilumi.libary.exception;
+package com.jadilumi.library.exception;
 
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;

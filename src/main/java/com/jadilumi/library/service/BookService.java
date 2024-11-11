@@ -1,6 +1,6 @@
-package com.jadilumi.libary.service;
+package com.jadilumi.library.service;
 
-import com.jadilumi.libary.domain.repository.BookRepository;
+import com.jadilumi.library.domain.repository.BookRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 

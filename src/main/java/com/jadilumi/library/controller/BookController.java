@@ -1,4 +1,4 @@
-package com.jadilumi.libary.controller;
+package com.jadilumi.library.controller;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.RequestMapping;

@@ -1,6 +1,6 @@
-package com.jadilumi.libary.domain.repository;
+package com.jadilumi.library.domain.repository;
 
-import com.jadilumi.libary.domain.books.Book;
+import com.jadilumi.library.domain.entities.books.Book;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

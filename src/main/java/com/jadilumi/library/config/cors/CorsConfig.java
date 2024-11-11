@@ -1,4 +1,4 @@
-package com.jadilumi.libary.config.cors;
+package com.jadilumi.library.config.cors;
 
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.CorsRegistry;
