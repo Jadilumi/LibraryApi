@@ -4,6 +4,7 @@ import com.jadilumi.library.domain.entities.books.enums.Genre;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.PositiveOrZero;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.math.BigDecimal;
 
@@ -32,6 +33,5 @@ public record BookDTO(
 
         @NotNull(message = "o preço de aquisição não pode ser nulo.")
         @PositiveOrZero(message = "O preço de aquisição deve ser maior ou igual a 0.")
-        BigDecimal purchaseCost,
-        byte[] coverBookImage) {
+        BigDecimal purchaseCost) {
 }

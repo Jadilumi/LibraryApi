@@ -63,7 +63,7 @@ public class Book {
     private Boolean availabilityStatus;
 
     @Transient
-    private BigDecimal totalProfit;
+    private BigDecimal totalProfit = new BigDecimal("0");
 
     @CreationTimestamp
     @Column(name = "created_at", nullable = false)
