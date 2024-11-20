@@ -1,13 +1,13 @@
-package com.jadilumi.libary;
+package com.jadilumi.library;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class LibaryApplication {
+public class LibraryApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(LibaryApplication.class, args);
+		SpringApplication.run(LibraryApplication.class, args);
 	}
 
 }
