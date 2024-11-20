@@ -74,4 +74,12 @@ Este projeto está licenciado sob a licença [Creative Commons](LICENSE) - veja 
 
 ---
 
+## Autores
+
+- José Milton de Oliveira Neto - 11035714
+- Dielder Leal                 - 01461719
+- Jailton Júnior               - 01225496
+- Leonardo Emanuel             - 01418337
+- Lucas Crespo                 - 01419654
+
 Obrigado por sua contribuição para o **LibraryApi**! 🎉
