@@ -1,0 +1,9 @@
+•Models
+	o classes
+	▪ Diagramas de classes, pode usar qualquer aplicação, como o Astah, StarUML ou semelhantes, deve salvar o arquivo nesta pasta
+	o database
+	▪ Recomendo utilizar o MySQL Workbench e criar diagramas. Deve salvar o arquivo nesta pasta
+	o mindmap
+	▪ Recomendo utilizar o FreeMind ou FreePlane, deve salvar o arquivo nesta pasta
+	o mockup
+	▪ Recomendo utilizar o Evolus Pencil, Canva ou qualquer ferramenta grátis, deve salvar o arquivo nesta pasta
