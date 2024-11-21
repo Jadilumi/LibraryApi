@@ -99,7 +99,101 @@ Use o PlantUML para melhor entendimento
 ![image](https://github.com/user-attachments/assets/daac90ab-bf40-4983-93e1-122ddb397781)
 
 
-## 📄 Licença
+### Lista de comandos GIT (mais usados durante o desenvolvimento)
+
+### 1. Inicialização e Clonagem
+Inicializar um novo repositório Git
+- git init
+
+### Clonar um repositório remoto
+- git clone <url-do-repositorio>
+
+### 2. Trabalhando com Branches
+Verificar as branches locais
+- git branch
+
+### Criar uma nova branch e mudar para ela
+- git checkout -b <nome-da-branch>
+
+### Mudar para uma branch existente
+- git checkout <nome-da-branch>
+
+### Listar todas as branches (locais e remotas)
+- git branch -a
+
+### 3. Trabalhando com Commits
+Adicionar arquivos ao staging (preparar para commit)
+- git add <arquivo>
+
+### Adicionar todos os arquivos modificados
+- git add .
+
+### Fazer um commit
+- git commit -m "Mensagem do commit"
+
+### Verificar o status dos arquivos
+- git status
+
+### 4. Trabalhando com Repositórios Remotos
+ Verificar os repositórios remotos configurados
+- git remote -v
+
+### Adicionar um repositório remoto
+- git remote add origin <url-do-repositorio>
+
+### Enviar commits para o repositório remoto
+- git push origin <nome-da-branch>
+
+### Baixar alterações do repositório remoto
+- git fetch
+
+### Atualizar a branch local com as mudanças do repositório remoto
+- git pull origin <nome-da-branch>
+
+### 5. Merge de Branches
+Fazer o merge de uma branch em outra
+- git checkout develop
+- git merge <nome-da-branch>
+
+### Verificar se existem conflitos de merge
+- git status
+
+### Resolver conflitos de merge
+### Abra os arquivos conflitantes e faça as alterações necessárias.
+- git add <arquivo-resolvido>
+
+### Commitar após resolver conflitos
+- git commit -m "Resolução de conflito"
+
+### 6. Trabalhando com Pull Requests (PR)
+### Criar um Pull Request (via interface web do GitHub/GitLab/Bitbucket)
+### Acesse o repositório na interface web e crie um PR para a branch `develop` ou `main`.
+
+### 7. Revisão de Pull Request e Merge
+### Fazer merge do PR após revisão (via interface web)
+
+### 8. Rebasing (opcional)
+Rebase da branch local com a branch de destino (normalmente, `develop`)
+- git checkout <nome-da-branch>
+- git fetch origin
+- git rebase origin/develop
+
+### 9. Limpeza e Manutenção do Repositório
+Excluir uma branch local após o merge
+- git branch -d <nome-da-branch>
+
+### Excluir uma branch remota após o merge
+- git push origin --delete <nome-da-branch>
+
+### 10. Outros Comandos Úteis
+### Visualizar o histórico de commits
+- git log
+
+### Visualizar o histórico de commits com gráficos
+- git log --oneline --graph --all
+
+
+### 📄 Licença
 
 Este projeto está licenciado sob a licença [Creative Commons](LICENSE) - veja o arquivo [LICENSE.md](LICENSE) para mais detalhes.
 
