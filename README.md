@@ -66,7 +66,7 @@ Para contribuir com este projeto, siga as etapas descritas no arquivo [CONTRIBUT
 - Mantenha seu fork atualizado antes de começar a trabalhar:
    ```
    git fetch upstream
-   git merge upstream/main
+   git merge upstream/develop
    ```
 ## 📄 Licença
 

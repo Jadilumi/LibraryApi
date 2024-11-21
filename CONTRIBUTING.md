@@ -98,6 +98,6 @@ Siga estas etapas para contribuir para o projeto:
 - Para manter seu fork atualizado antes de começar a trabalhar:
    ```
    git fetch upstream
-   git merge upstream/main
+   git merge upstream/develop
    ```
 Obrigado por sua contribuição para o LibraryApi! 🎉
