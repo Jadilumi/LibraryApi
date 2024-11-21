@@ -2,9 +2,9 @@ package com.jadilumi.library.controller;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
-import com.jadilumi.library.domain.entities.books.Book;
-import com.jadilumi.library.domain.entities.books.dto.BookDTO;
-import com.jadilumi.library.domain.entities.books.dto.ResponseBookListDTO;
+import com.jadilumi.library.domain.entities.book.Book;
+import com.jadilumi.library.domain.entities.book.dto.BookDTO;
+import com.jadilumi.library.domain.entities.book.dto.ResponseBookListDTO;
 import com.jadilumi.library.service.BookService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;

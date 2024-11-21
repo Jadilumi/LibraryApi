@@ -1,9 +1,10 @@
 package com.jadilumi.library.service;
 
-import com.jadilumi.library.domain.entities.books.Book;
-import com.jadilumi.library.domain.entities.books.BookMapper;
-import com.jadilumi.library.domain.entities.books.dto.BookDTO;
-import com.jadilumi.library.domain.entities.books.dto.ResponseBookListDTO;
+import com.jadilumi.library.domain.entities.book.Book;
+import com.jadilumi.library.domain.entities.book.BookMapper;
+import com.jadilumi.library.domain.entities.book.dto.BookDTO;
+import com.jadilumi.library.domain.entities.book.dto.ResponseBookListDTO;
+import com.jadilumi.library.domain.entities.loan.Loan;
 import com.jadilumi.library.domain.repository.BookRepository;
 import com.jadilumi.library.exception.CustomException;
 import lombok.RequiredArgsConstructor;
@@ -14,7 +15,9 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
+import java.util.List;
 import java.util.UUID;
+import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -64,6 +67,13 @@ public class BookService {
                 ));
     }
 
+    public List<Loan> listAllLoansFromOutside() {
+        return bookRepository.findAll()
+                .stream()
+                .flatMap(book -> book.getLoans().stream())
+                .collect(Collectors.toList());
+    }
+
     public Book getBookById(UUID bookId) {
         return bookRepository.findById(bookId).orElseThrow(() -> new CustomException("Book not found!", HttpStatus.NOT_FOUND));
     }
@@ -71,5 +81,9 @@ public class BookService {
     public String deleteBookById(UUID bookId) {
         bookRepository.deleteById(bookId);
         return "Book deleted successfully";
+    }
+
+    public void saveBookFromOutside(Book book) {
+        bookRepository.save(book);
     }
 }
