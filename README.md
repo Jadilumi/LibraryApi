@@ -68,6 +68,37 @@ Para contribuir com este projeto, siga as etapas descritas no arquivo [CONTRIBUT
    git fetch upstream
    git merge upstream/develop
    ```
+
+### Fluxo de trabalho 
+Use o PlantUML para melhor entendimento
+
+   ```
+   @startuml
+   start
+   :Desenvolver em uma Branch;
+   :Commit das alterações;
+   :Push para o repositório remoto;
+   :Pedido de Merge para a branch `develop`;
+   if (Merge Avaliado?) then (sim)
+     :Aplicar Merge para `develop`;
+     :Testes e revisão;
+     :Pedido de Merge para `main`;
+     if (Merge Avaliado?) then (sim)
+       :Aplicar Merge para `main`;
+       :Deploy para produção;
+     else (não)
+       :Revisar Merge para `main`;
+     endif
+   else (não)
+     :Revisar Merge para `develop`;
+   endif
+   stop
+   @enduml
+   ```
+
+![image](https://github.com/user-attachments/assets/daac90ab-bf40-4983-93e1-122ddb397781)
+
+
 ## 📄 Licença
 
 Este projeto está licenciado sob a licença [Creative Commons](LICENSE) - veja o arquivo [LICENSE.md](LICENSE) para mais detalhes.
