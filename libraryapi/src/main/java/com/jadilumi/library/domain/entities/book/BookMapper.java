@@ -7,5 +7,6 @@ import org.mapstruct.*;
 public abstract class BookMapper {
 
     @BeanMapping(nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.SET_TO_NULL)
+    @Mapping(target = "availableStock", source = "availableStock")
     public abstract void mapDTOToEntity(BookDTO dto, @MappingTarget Book entity);
 }
