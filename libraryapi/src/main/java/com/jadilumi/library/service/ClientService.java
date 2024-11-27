@@ -42,6 +42,10 @@ public class ClientService {
         return clientRepository.findById(clientId).orElseThrow(() -> new CustomException("Client not found!", HttpStatus.NOT_FOUND));
     }
 
+    public Client getClientByDocument(String document) {
+        return clientRepository.findByDocument(document).orElseThrow(() -> new CustomException("Client not found!", HttpStatus.NOT_FOUND));
+    }
+
     public void deleteClientById(UUID clientId) {
         clientRepository.findById(clientId).orElseThrow(() -> new CustomException("Client not found!", HttpStatus.NOT_FOUND));
         clientRepository.deleteById(clientId);

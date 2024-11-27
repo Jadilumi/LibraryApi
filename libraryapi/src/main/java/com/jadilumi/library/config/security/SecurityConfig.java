@@ -27,7 +27,7 @@ public class SecurityConfig {
 				.authorizeHttpRequests(auth -> auth
 						.requestMatchers("/auth/**").permitAll()
 						.requestMatchers("/h2-console/**").permitAll() // Liberar o console H2
-						.anyRequest().permitAll()) // Não exigir autenticação para outros endpoints
+						.anyRequest().authenticated()) // Não exigir autenticação para outros endpoints
 				.addFilterBefore(securityFilter, UsernamePasswordAuthenticationFilter.class)
 				.build();
 	}

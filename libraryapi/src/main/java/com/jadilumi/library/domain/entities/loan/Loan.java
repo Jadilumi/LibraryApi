@@ -1,8 +1,8 @@
 package com.jadilumi.library.domain.entities.loan;
 
 
-import com.fasterxml.jackson.annotation.JsonIdentityReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.jadilumi.library.domain.entities.book.Book;
 import com.jadilumi.library.domain.entities.client.Client;
 import com.jadilumi.library.domain.entities.loan.enums.LoanStatus;
@@ -33,7 +33,6 @@ public class Loan {
 
     @ManyToOne
     @JoinColumn(name = "client_id", nullable = false)
-    @JsonIdentityReference(alwaysAsId = true)
     private Client client;
 
     @ManyToOne

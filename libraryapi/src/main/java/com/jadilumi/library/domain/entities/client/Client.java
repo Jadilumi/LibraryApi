@@ -1,5 +1,6 @@
 package com.jadilumi.library.domain.entities.client;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.jadilumi.library.domain.entities.loan.Loan;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
