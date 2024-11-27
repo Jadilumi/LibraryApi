@@ -52,13 +52,6 @@ export default function NavBar() {
                 <Navbar.Toggle/>
             </div>
             <Navbar.Collapse>
-                <Navbar.Link href="/in/dashboard" active={location.pathname === "/dashboard"}
-                             className={`text-white hover:text-white`}>
-                    <div className="flex items-center">
-                        <HiHome className="mr-2"/>
-                        Dashboard
-                    </div>
-                </Navbar.Link>
                 <Navbar.Link href="/in/books" active={location.pathname === "/books"}
                              className="text-white hover:text-white">
                     <div className="flex items-center">
@@ -66,6 +59,7 @@ export default function NavBar() {
                         Livros
                     </div>
                 </Navbar.Link>
+
                 <Navbar.Link href="/in/clients" active={location.pathname === "/clients"}
                              className="text-white hover:text-white">
                     <div className="flex items-center">
@@ -73,25 +67,12 @@ export default function NavBar() {
                         Clientes
                     </div>
                 </Navbar.Link>
-                <Navbar.Link href="/in/loans" active={location.pathname === "/loans"}
-                             className="text-white hover:text-white">
+
+                <Navbar.Link href="/in/loans" active={location.pathname === "/dashboard"}
+                             className={`text-white hover:text-white`}>
                     <div className="flex items-center">
-                        <HiClipboardList className="mr-2"/>
+                        <HiHome className="mr-2"/>
                         Empréstimos
-                    </div>
-                </Navbar.Link>
-                <Navbar.Link href="/in/fines" active={location.pathname === "/fines"}
-                             className="text-white hover:text-white">
-                    <div className="flex items-center">
-                        <HiCurrencyDollar className="mr-2"/>
-                        Empréstimos Vencidos
-                    </div>
-                </Navbar.Link>
-                <Navbar.Link href="/in/reports" active={location.pathname === "/reports"}
-                             className="text-white hover:text-white">
-                    <div className="flex items-center">
-                        <HiChartBar className="mr-2"/>
-                        Relatórios
                     </div>
                 </Navbar.Link>
             </Navbar.Collapse>

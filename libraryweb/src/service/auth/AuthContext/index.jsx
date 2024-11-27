@@ -16,7 +16,7 @@ export const AuthProvider = ({children}) => {
             return;
         }
 
-        await axios.post("http://localhost:8080/api/auth/validate-token", {}, {
+        await axios.post("http://localhost:8080/auth/validate-token", {}, {
             headers: {
                 Authorization: `Bearer ${token}`
             }

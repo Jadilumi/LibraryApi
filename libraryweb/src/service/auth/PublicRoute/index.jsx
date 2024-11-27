@@ -5,7 +5,7 @@ export default function PublicRoute({children}) {
     const {isAuthenticated} = useAuth();
 
     if (isAuthenticated) {
-        return <Navigate to="/in/dashboard"/>;
+        return <Navigate to="/in/books"/>;
     }
 
     return children;

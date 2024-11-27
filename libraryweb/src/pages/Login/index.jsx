@@ -9,11 +9,14 @@ import {useForm} from "react-hook-form";
 import {zodResolver} from "@hookform/resolvers/zod";
 import {HiMail} from "react-icons/hi";
 import {RiLockPasswordLine} from "react-icons/ri";
+import {useAuth} from "../../service/auth/AuthContext/index.jsx";
+import axios from "axios";
 
 
 export default function Login() {
     const [showPassword, setShowPassword] = useState(false);
     const [isLoading, setIsLoading] = useState(false);
+    const {login} = useAuth();
 
     const navigate = useNavigate();
 
@@ -26,8 +29,13 @@ export default function Login() {
         resolver: zodResolver(createLoginFromSchema),
     });
 
-    const login = (data) => {
-        console.log(data)
+    const handleLogin = async (data) => {
+        await axios.post('http://localhost:8080/auth/login', data).then((r) => {
+            if (r.status === 200) {
+                login(r.data.token);
+                navigate("/in/books")
+            }
+        })
     }
 
 
@@ -43,7 +51,7 @@ export default function Login() {
             <div
                 className={`md:w-1/2 p-5 h-full flex items-center justify-center md:justify-start md:bg-gray-100 rounded-md md:shadow-md md:shadow-gray-500`}>
                 <form className={`w-96 p-5 md:p-0`} method={"POST"}
-                      onSubmit={handleSubmit(login)}>
+                      onSubmit={handleSubmit(handleLogin)}>
                     <div className={`mb-10 text-center md:text-left`}>
                         <span className={`text-3xl`}>Login</span>
                     </div>

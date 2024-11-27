@@ -26,6 +26,11 @@ export default function Book() {
         baseURL: 'http://localhost:8080',
     });
 
+    const getToken = () => {
+        const token = sessionStorage.getItem("jwtToken");
+        return token ? `Bearer ${token}` : null;
+    };
+
     const fetchBooks = async () => {
         const params = new URLSearchParams({
             page: actualPage,
@@ -36,9 +41,13 @@ export default function Book() {
             params.append("title", searchValue);
         }
 
-        const response = await axiosInstance.get(`/books?${params.toString()}`);
+        const response = await axiosInstance.get(`/books?${params.toString()}`, {
+            headers: {
+                Authorization: getToken()
+            }
+        })
         return response.data;
-    };
+    }
 
     const handleLineClick = (data) => {
         navigate(`/in/books/edit/${data.bookId}`);
@@ -69,24 +78,23 @@ export default function Book() {
         setPage(0)
         setSearchValue(receivedValue);
         refetch();
-
     }
 
     if (isError) return <p>Erro ao carregar os dados: {error.message}</p>;
 
     return (
         <div>
-
-
             <Table
                 titlePage={"Livros"}
                 addButtonMessage={"Cadastrar Livro"}
                 addButtonLink={"/in/books/add"}
                 headers={headers}
-                data={data}
+                data={data.content}
                 handleLineClick={handleLineClick}
                 headerMapping={headerMapping}
                 handleClickOnSearch={handleClickOnSearch}
+                hasAddButton={true}
+                hasSearchField={true}
             />
             <div className="flex justify-center mt-4 gap-x-10 p-5">
                 <Button

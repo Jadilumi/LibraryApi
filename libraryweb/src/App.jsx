@@ -14,6 +14,8 @@ import Setting from "./pages/Setting/index.jsx";
 import Report from "./pages/Report/index.jsx";
 import BookForm from "./pages/Book/BookForm/index.jsx";
 import LoanForm from "./pages/Loan/LoanForm/index.jsx";
+import ProtectedRoute from "./service/auth/ProtectedRoute/index.jsx";
+import ClientForm from "./pages/Client/ClientForm/index.jsx";
 
 function App() {
     return (
@@ -25,81 +27,67 @@ function App() {
                     </PublicRoute>
                 }/>
 
-                <Route path={"/in/dashboard"} element={
-                    <PublicRoute>
-                        <NavBar/>
-                        <Dashboard/>
-                    </PublicRoute>
-                }/>
-
                 <Route path={"/in/books"} element={
-                    <PublicRoute>
+                    <ProtectedRoute>
                         <NavBar/>
                         <Book/>
-                    </PublicRoute>
+                    </ProtectedRoute>
                 }/>
 
                 <Route path={"/in/books/add"} element={
-                    <PublicRoute>
+                    <ProtectedRoute>
                         <NavBar/>
                         <BookForm/>
-                    </PublicRoute>
+                    </ProtectedRoute>
                 }/>
 
                 <Route path={"/in/books/edit/:bookId"} element={
-                    <PublicRoute>
+                    <ProtectedRoute>
                         <NavBar/>
                         <BookForm/>
-                    </PublicRoute>
+                    </ProtectedRoute>
                 }/>
 
                 <Route path={"/in/clients"} element={
-                    <PublicRoute>
+                    <ProtectedRoute>
                         <NavBar/>
                         <Client/>
-                    </PublicRoute>
+                    </ProtectedRoute>
+                }/>
+
+                <Route path={"/in/clients/add"} element={
+                    <ProtectedRoute>
+                        <NavBar/>
+                        <ClientForm/>
+                    </ProtectedRoute>
+                }/>
+
+                <Route path={"/in/clients/edit/:clientId"} element={
+                    <ProtectedRoute>
+                        <NavBar/>
+                        <ClientForm/>
+                    </ProtectedRoute>
+                }/>
+
+                <Route path={"/in/loans"} element={
+                    <ProtectedRoute>
+                        <NavBar/>
+                        <Loan/>
+                    </ProtectedRoute>
                 }/>
 
                 <Route path={"/in/loans/add"} element={
-                    <PublicRoute>
+                    <ProtectedRoute>
                         <NavBar/>
                         <LoanForm/>
-                    </PublicRoute>
+                    </ProtectedRoute>
                 }/>
 
                 <Route path={"/in/loans/edit/:bookId/:loanId"} element={
-                    <PublicRoute>
+                    <ProtectedRoute>
                         <NavBar/>
                         <LoanForm/>
-                    </PublicRoute>
-                }/>
-
-                <Route path={"/in/fines"} element={
-                    <PublicRoute>
-                        <NavBar/>
-                        <Fine/>
-                    </PublicRoute>
-                }/>
-
-                <Route path={"/in/reports"} element={
-                    <PublicRoute>
-                        <NavBar/>
-                        <Report/>
-                    </PublicRoute>
-                }/>
-
-                <Route path={"/in/profile"} element={
-                    <PublicRoute>
-                        <NavBar/>
-                        <Profile/>
-                    </PublicRoute>
-                }/>
-
-                <Route path={"/in/settings"} element={
-                    <PublicRoute>
-                        <NavBar/>
-                        <Setting/>
-                    </PublicRoute>
+                    </ProtectedRoute>
                 }/>
             </Routes>
         </div>

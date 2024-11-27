@@ -5,7 +5,7 @@ import {Button, Label, Select, TextInput} from "flowbite-react";
 import axios from "axios";
 import {useQuery} from '@tanstack/react-query';
 import debounce from 'lodash.debounce';
-import {FaArrowDown} from "react-icons/fa";
+import {FaArrowDown, FaSearchengin} from "react-icons/fa";
 import Swal from "sweetalert2";
 
 export default function LoanForm() {
@@ -20,6 +20,8 @@ export default function LoanForm() {
         estimateLoanReturnDate: "",
         interestRatePerDay: ""
     });
+    const [clientDocument, setClientDocument] = useState("");
+    const [client, setClient] = useState({});
     const [isLoading, setIsLoading] = useState(false);
 
     const [data, setData] = useState({});
@@ -28,13 +30,26 @@ export default function LoanForm() {
         baseURL: 'http://localhost:8080',
     });
 
+    const getToken = () => {
+        const token = sessionStorage.getItem("jwtToken");
+        return token ? `Bearer ${token}` : null;
+    };
+
     const fetchBooks = async (bookId) => {
-        const response = await axiosInstance.get(`/books/${bookId}`)
+        const response = await axiosInstance.get(`/books/${bookId}`, {
+            headers: {
+                Authorization: getToken()
+            }
+        })
         return response.data;
     };
 
     const fetchLoanById = async () => {
-        const response = await axiosInstance.get(`/loans/view/${bookId}/${loanId}`)
+        const response = await axiosInstance.get(`/loans/view/${bookId}/${loanId}`, {
+            headers: {
+                Authorization: getToken()
+            }
+        })
         return response.data;
     }
 
@@ -81,9 +96,16 @@ export default function LoanForm() {
                 book: {
                     bookId: bookId,
                 },
+                client: {
+                    clientId: client.clientId
+                }
             };
 
-            await axiosInstance.put(`/loans/edit/${loanId}`, updatedLoan).then((r) => {
+            await axiosInstance.put(`/loans/edit/${loanId}`, updatedLoan, {
+                headers: {
+                    Authorization: getToken()
+                }
+            }).then((r) => {
                 if (r.status === 200) {
                     Swal.fire({
                         title: "Empréstimo editado com sucesso!"
@@ -93,11 +115,21 @@ export default function LoanForm() {
                 }
             })
         } else {
-            await axiosInstance.post("/loans", loan).then((r) => {
+            const updatedLoan = {
+                ...loan,
+                client: {
+                    clientId: client.clientId
+                }
+            };
+            await axiosInstance.post("/loans", updatedLoan, {
+                headers: {
+                    Authorization: getToken()
+                }
+            }).then((r) => {
                 Swal.fire({
                     title: "Empréstimo salvo com sucesso!"
                 }).then((r) => {
-                    navigate(`/in/books/${preSelectedBookId}`)
+                    navigate(`/in/books/edit/${preSelectedBookId}`)
                 })
             })
         }
@@ -107,6 +139,7 @@ export default function LoanForm() {
         style: "currency",
         currency: "BRL",
     });
+
 
     return (
         <div className={`p-5`}>
@@ -138,7 +171,11 @@ export default function LoanForm() {
                                     denyButtonText: "Não",
                                 }).then((r) => {
                                     if (r.isConfirmed) {
-                                        axiosInstance.delete(`/loans/del/${bookId}/${loanId}`).then((r) => {
+                                        axiosInstance.delete(`/loans/del/${bookId}/${loanId}`, {
+                                            headers: {
+                                                Authorization: getToken()
+                                            }
+                                        }).then((r) => {
 
                                         }).catch((e) => {
                                             navigate(`/in/books/edit/${bookId}`)
@@ -153,7 +190,11 @@ export default function LoanForm() {
                         </Button>
                         {bookId && loanId &&
                             <Button color={"blue"} onClick={() => {
-                                axiosInstance.put(`/loans/edit/${bookId}/${loanId}`).then(r => {
+                                axiosInstance.put(`/loans/edit/${bookId}/${loanId}`, {
+                                    headers: {
+                                        Authorization: getToken()
+                                    }
+                                }).then(r => {
                                     if (r.status === 200) {
                                         Swal.fire({
                                             title: "Livro Retornado com sucesso!"
@@ -177,6 +218,36 @@ export default function LoanForm() {
                             value={`${data.title} - ${data.author} - ${data.edition}`}
                             disabled
                         />
+                    </div>
+
+                    <div className={`w-96`}>
+                        <div>
+                            <Label className={`mb-1 ml-1`} value={`Cliente`}/>
+                        </div>
+                        <div className={` flex gap-x-3`}>
+                            <TextInput
+                                className={`w-full`}
+                                id={"clientDocument"}
+                                value={loan.client ? loan.client.name + " - " + loan.client.document : clientDocument}
+                                onChange={(e) => {
+                                    setClientDocument(e.target.value)
+                                }}
+                                disabled={loan.client}
+                            />
+                            <Button onClick={() => {
+                                axiosInstance.get(`/clients/get/document/${clientDocument.toString()}`, {
+                                    headers: {
+                                        Authorization: getToken()
+                                    }
+                                }).then(r => {
+                                    setClient(r.data)
+                                    console.log(client)
+
+                                })
+                            }} className={`flex items-center ${loan.client ? 'hidden' : 'block'}`}>
+                                <FaSearchengin size={20}/>
+                            </Button>
+                        </div>
                     </div>
 
                     <div className={`w-96`}>

@@ -201,8 +201,18 @@ export default function BookForm() {
         baseURL: 'http://localhost:8080',
     });
 
+    const getToken = () => {
+        const token = sessionStorage.getItem("jwtToken");
+        return token ? `Bearer ${token}` : null;
+    };
+
+
     const handleDeleteBook = async () => {
-        await axiosInstance.delete(`/books/${bookId}`).then((r) => {
+        await axiosInstance.delete(`/books/${bookId}`, {
+            headers: {
+                Authorization: getToken()
+            }
+        }).then((r) => {
 
         }).catch((e) => {
             if (e.status === 410) {
@@ -227,7 +237,8 @@ export default function BookForm() {
         if (bookId) {
             await axiosInstance.put(`/books/${bookId}`, form, {
                 headers: {
-                    "Content-Type": "multipart/form-data"
+                    "Content-Type": "multipart/form-data",
+                    Authorization: getToken()
                 }
             }).then((r) => {
                 Swal.fire({
@@ -238,7 +249,8 @@ export default function BookForm() {
         } else {
             await axiosInstance.post(`/books`, form, {
                 headers: {
-                    "Content-Type": "multipart/form-data"
+                    "Content-Type": "multipart/form-data",
+                    Authorization: getToken()
                 }
             }).then((r) => {
                 Swal.fire({
@@ -257,7 +269,11 @@ export default function BookForm() {
         if (bookId) {
             setIsLoading(true)
             const fetchBook = async () => {
-                await axiosInstance.get(`/books/${bookId}`).then((r) => {
+                await axiosInstance.get(`/books/${bookId}`, {
+                    headers: {
+                        Authorization: getToken()
+                    }
+                }).then((r) => {
                     setValue("title", r.data.title);
                     setValue("author", r.data.author);
                     setValue("publisher", r.data.publisher)
