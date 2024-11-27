@@ -1,6 +1,9 @@
 package com.jadilumi.library.domain.entities.users.dto;
 
 import java.util.UUID;
+
+import com.jadilumi.library.domain.entities.users.UserRole;
+
 import lombok.*;
 
 
@@ -16,4 +19,5 @@ public class UserDTO {
 	private String email;
 	private String password;	
 	private String phone;
+	private UserRole role;
 }

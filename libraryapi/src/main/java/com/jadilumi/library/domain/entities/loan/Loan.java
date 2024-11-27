@@ -2,7 +2,9 @@ package com.jadilumi.library.domain.entities.loan;
 
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.jadilumi.library.domain.entities.book.Book;
+import com.jadilumi.library.domain.entities.client.Client;
 import com.jadilumi.library.domain.entities.loan.enums.LoanStatus;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -29,10 +31,10 @@ public class Loan {
     @GeneratedValue(strategy = GenerationType.UUID)
     private UUID loanId;
 
-//    @ManyToOne
-//    @JoinColumn(name = "user_id", nullable = false)
-//    @JsonIgnore
-//    private User user
+    @ManyToOne
+    @JoinColumn(name = "client_id", nullable = false)
+    @JsonIgnoreProperties("loans")
+    private Client client;
 
     @ManyToOne
     @JoinColumn(name = "book_id", nullable = false)
@@ -60,10 +62,10 @@ public class Loan {
     private LoanStatus loanStatus = LoanStatus.IN_PROGRESS;
 
     @Transient
-    private BigDecimal totalLoanCost;
+    private BigDecimal totalLoanCost = BigDecimal.ZERO;
 
     @Transient
-    private Integer loanDays;
+    private Integer loanDays = 1;
 
     @PostLoad
     private void runTransientMethods() {
@@ -74,6 +76,10 @@ public class Loan {
 
     private void calculateLoanDays() {
         this.loanDays = (int) ChronoUnit.DAYS.between(loanStartDate.toLocalDate(), LocalDate.now());
+
+        if (this.loanDays.equals(0)) {
+            this.loanDays = 1;
+        }
     }
 
     private void calculateTotalLoanCost() {
