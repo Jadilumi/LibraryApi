@@ -4,14 +4,9 @@ import PublicRoute from "./service/auth/PublicRoute/index.jsx";
 import NotFound from "./components/NotFound/index.jsx";
 import Login from "./pages/Login/index.jsx";
 import NavBar from "./components/Navbar/index.jsx";
-import Dashboard from "./pages/Dashboard/index.jsx";
 import Book from "./pages/Book/index.jsx";
 import Client from "./pages/Client/index.jsx";
 import Loan from "./pages/Loan/index.jsx";
-import Fine from "./pages/Fine/index.jsx";
-import Profile from "./pages/Profile/index.jsx";
-import Setting from "./pages/Setting/index.jsx";
-import Report from "./pages/Report/index.jsx";
 import BookForm from "./pages/Book/BookForm/index.jsx";
 import LoanForm from "./pages/Loan/LoanForm/index.jsx";
 import ProtectedRoute from "./service/auth/ProtectedRoute/index.jsx";
@@ -88,6 +83,10 @@ function App() {
                         <NavBar/>
                         <LoanForm/>
                     </ProtectedRoute>
+                }/>
+
+                <Route path={"*"} element={
+                    <NotFound/>
                 }/>
             </Routes>
         </div>

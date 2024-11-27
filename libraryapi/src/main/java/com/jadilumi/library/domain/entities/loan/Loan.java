@@ -33,6 +33,7 @@ public class Loan {
 
     @ManyToOne
     @JoinColumn(name = "client_id", nullable = false)
+    @JsonIgnoreProperties("loans")
     private Client client;
 
     @ManyToOne
@@ -61,10 +62,10 @@ public class Loan {
     private LoanStatus loanStatus = LoanStatus.IN_PROGRESS;
 
     @Transient
-    private BigDecimal totalLoanCost;
+    private BigDecimal totalLoanCost = BigDecimal.ZERO;
 
     @Transient
-    private Integer loanDays;
+    private Integer loanDays = 1;
 
     @PostLoad
     private void runTransientMethods() {

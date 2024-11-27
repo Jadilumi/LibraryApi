@@ -44,8 +44,6 @@ export default function NavBar() {
                         <span className="block text-sm">Jane Smith</span>
                         <span className="block truncate text-sm font-medium">jane.smith@library.com</span>
                     </Dropdown.Header>
-                    <Dropdown.Item href={"/in/profile"}>Perfil</Dropdown.Item>
-                    <Dropdown.Item href={"/in/settings"}>Configurações</Dropdown.Item>
                     <Dropdown.Divider/>
                     <Dropdown.Item onClick={logout}>Sair</Dropdown.Item>
                 </Dropdown>
