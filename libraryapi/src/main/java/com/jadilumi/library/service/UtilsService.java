@@ -6,9 +6,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
-import java.util.Arrays;
-import java.util.List;
-
 @Service
 @RequiredArgsConstructor
 public class UtilsService {
@@ -24,8 +21,8 @@ public class UtilsService {
             throw new CustomException("File size exceeds the maximum limit.", HttpStatus.BAD_REQUEST);
         }
 
-        List<String> ALLOWED_CONTENT_TYPES = Arrays.asList("application/pdf", "image/jpeg", "image/png");
-        if (!ALLOWED_CONTENT_TYPES.contains(file.getContentType())) {
+        String ALLOWED_CONTENT_TYPES = "image/png";
+        if (!ALLOWED_CONTENT_TYPES.equals(file.getContentType())) {
             throw new CustomException("Invalid file type.", HttpStatus.BAD_REQUEST);
         }
 

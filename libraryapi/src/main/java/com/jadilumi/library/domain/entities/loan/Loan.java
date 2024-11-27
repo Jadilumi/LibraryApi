@@ -3,6 +3,7 @@ package com.jadilumi.library.domain.entities.loan;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.jadilumi.library.domain.entities.book.Book;
+import com.jadilumi.library.domain.entities.client.Client;
 import com.jadilumi.library.domain.entities.loan.enums.LoanStatus;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -29,10 +30,10 @@ public class Loan {
     @GeneratedValue(strategy = GenerationType.UUID)
     private UUID loanId;
 
-//    @ManyToOne
-//    @JoinColumn(name = "user_id", nullable = false)
-//    @JsonIgnore
-//    private User user
+    @ManyToOne
+    @JoinColumn(name = "loan_id", nullable = false)
+    @JsonIgnore
+    private Client client;
 
     @ManyToOne
     @JoinColumn(name = "book_id", nullable = false)
@@ -74,6 +75,10 @@ public class Loan {
 
     private void calculateLoanDays() {
         this.loanDays = (int) ChronoUnit.DAYS.between(loanStartDate.toLocalDate(), LocalDate.now());
+
+        if (this.loanDays.equals(0)) {
+            this.loanDays = 1;
+        }
     }
 
     private void calculateTotalLoanCost() {
