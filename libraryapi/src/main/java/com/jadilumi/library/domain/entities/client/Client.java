@@ -1,5 +1,6 @@
 package com.jadilumi.library.domain.entities.client;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.jadilumi.library.domain.entities.loan.Loan;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -28,6 +29,7 @@ public class Client {
 
     private String name;
 
-    @OneToMany(mappedBy = "client", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "client", orphanRemoval = true)
+    @JsonIgnoreProperties("client")
     List<Loan> loans = new ArrayList<>();
 }

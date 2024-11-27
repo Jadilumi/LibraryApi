@@ -39,7 +39,12 @@ public class ClientService {
     }
 
     public Client getClientById(UUID clientId) {
+        System.out.println(clientRepository.findById(clientId).orElseThrow(() -> new CustomException("Client not found!", HttpStatus.NOT_FOUND)).getLoans().get(0).getLoanDays());
         return clientRepository.findById(clientId).orElseThrow(() -> new CustomException("Client not found!", HttpStatus.NOT_FOUND));
+    }
+
+    public Client getClientByDocument(String document) {
+        return clientRepository.findClientByDocument(document).orElseThrow(() -> new CustomException("Client not found!", HttpStatus.NOT_FOUND));
     }
 
     public void deleteClientById(UUID clientId) {

@@ -37,8 +37,17 @@ public class ClientController {
         return new ResponseEntity<>(clientService.getAllClients(page, size), HttpStatus.ACCEPTED);
     }
 
-    @GetMapping("/get/{clientId}")
+    @GetMapping("/view/document/{document}")
+    public ResponseEntity<Client> listClientByDocument(
+            @PathVariable String document
+    ) {
+        System.out.println(clientService.getClientByDocument(document).getName() + " Voltou do Service por documento");
+        return new ResponseEntity<>(clientService.getClientByDocument(document), HttpStatus.ACCEPTED);
+    }
+
+    @GetMapping("/view/id/{clientId}")
     public ResponseEntity<Client> listClientById(@PathVariable UUID clientId) {
+        System.out.println(clientService.getClientById(clientId).getName() + " Voltou do service por ID");
         return new ResponseEntity<>(clientService.getClientById(clientId), HttpStatus.ACCEPTED);
     }
 
