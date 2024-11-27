@@ -55,8 +55,8 @@ public class BookService {
         return bookRepository.save(bookToEdit);
     }
 
-    public Page<ResponseBookListDTO> listBooks(int page, int size) {
-        return bookRepository.findAll(PageRequest.of(page, size)).map(book ->
+    public Page<ResponseBookListDTO> listBooks(String title, int page, int size) {
+        return bookRepository.buscarPorParametros(title, PageRequest.of(page, size)).map(book ->
                 new ResponseBookListDTO(
                         book.getBookId(),
                         book.getTitle(),
