@@ -30,7 +30,7 @@ export default function Login() {
     });
 
     const handleLogin = async (data) => {
-        await axios.post('http://localhost:8080/auth/login', data).then((r) => {
+        await axios.post('https://libraryapi-production-b14d.up.railway.app/auth/login', data).then((r) => {
             if (r.status === 200) {
                 login(r.data.token);
                 navigate("/in/books")
