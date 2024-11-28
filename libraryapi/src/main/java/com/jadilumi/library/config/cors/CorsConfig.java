@@ -11,7 +11,8 @@ public class CorsConfig implements WebMvcConfigurer {
     public void addCorsMappings(CorsRegistry registry) {
         registry.addMapping("/**")
                 .allowedHeaders("*")
-                .allowedOrigins("*")
-                .allowedMethods("GET", "POST", "DELETE", "PUT", "OPTIONS");
+                .allowedOrigins("https://libraryweb.vercel.app/")
+                .allowedMethods("GET", "POST", "DELETE", "PUT", "OPTIONS")
+                .allowCredentials(true);
     }
 }
