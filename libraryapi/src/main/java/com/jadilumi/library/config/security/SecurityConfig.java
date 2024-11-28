@@ -22,7 +22,7 @@ public class SecurityConfig {
 
 	@Bean
 	SecurityFilterChain securityFilterChain(HttpSecurity httpSecurity) throws Exception {
-		return httpSecurity.csrf(csrf -> csrf.disable()) // Desabilitar CSRF para evitar erros no H2
+		return httpSecurity.cors().and().csrf(csrf -> csrf.disable()) // Desabilitar CSRF para evitar erros no H2
 				.headers(headers -> headers.frameOptions(frame -> frame.sameOrigin())) // Permitir uso de frames no console H2
 				.authorizeHttpRequests(auth -> auth
 						.requestMatchers("/auth/**").permitAll()
