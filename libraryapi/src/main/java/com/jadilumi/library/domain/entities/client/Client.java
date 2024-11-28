@@ -29,7 +29,7 @@ public class Client {
 
     private String name;
 
-    @OneToMany(mappedBy = "client", orphanRemoval = true)
+    @OneToMany(mappedBy = "client", orphanRemoval = true, cascade = CascadeType.ALL)
     @JsonIgnoreProperties("client")
     List<Loan> loans = new ArrayList<>();
 }
