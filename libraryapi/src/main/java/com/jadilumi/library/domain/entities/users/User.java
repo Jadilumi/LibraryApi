@@ -37,11 +37,12 @@ public class User implements UserDetails {
 	private String phone;
 	private UserRole role;
 
-	public User(String email, String password, UserRole role) {
+	public User(String email, String password, UserRole role, String address) {
 		super();
 		this.email = email;
 		this.password = password;
 		this.role = role;
+		this.address = address;
 	}
 
 	@Override

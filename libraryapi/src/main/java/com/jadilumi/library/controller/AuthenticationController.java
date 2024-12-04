@@ -14,6 +14,10 @@ import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.client.RestTemplate;
+
+import java.util.HashMap;
+import java.util.Map;
 
 @RestController
 @RequestMapping("/auth")
@@ -27,6 +31,9 @@ public class AuthenticationController {
 
     @Autowired
     private UserRepository userRepository;
+
+    @Autowired
+    private RestTemplate restTemplate;
 
     @PostMapping("/login")
     public ResponseEntity<?> login(@RequestBody @Valid AuthenticationDTO data) {
@@ -44,7 +51,8 @@ public class AuthenticationController {
             return ResponseEntity.badRequest().build();
 
         String encryptedPassword = new BCryptPasswordEncoder().encode(data.password());
-        User newUser = new User(data.email(), encryptedPassword, data.role());
+        String url = "https://viacep.com.br/ws/" + data.cep() + "/json/";
+        User newUser = new User(data.email(), encryptedPassword, data.role(), getAddress(url));
 
         this.userRepository.save(newUser);
 
@@ -54,6 +62,15 @@ public class AuthenticationController {
     @PostMapping("/validate-token")
     public ResponseEntity<Boolean> validateToken(@RequestHeader("Authorization") String token) {
         return new ResponseEntity<>(this.tokenService.validateToken(token.replace("Bearer ", "")) != null, HttpStatus.ACCEPTED);
+    }
+
+    private String getAddress(String url) {
+        Map dadosCep = restTemplate.getForObject(url, Map.class);
+        String address = dadosCep.get("logradouro") + ", "
+                + dadosCep.get("bairro") + ", "
+                + dadosCep.get("localidade") + ", "
+                +dadosCep.get("uf");
+        return address;
     }
 
 }
